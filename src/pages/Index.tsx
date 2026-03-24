@@ -76,70 +76,72 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background flex items-start justify-center p-4 py-8">
-      <div className="w-full max-w-lg space-y-6">
+      <div className="w-full max-w-4xl space-y-6">
         <div className="text-center space-y-2">
           <h1 className="text-3xl font-bold tracking-tight text-foreground">Månadskalkylator</h1>
           <p className="text-muted-foreground">Bostad & bil – räkna ut din totala månadskostnad</p>
         </div>
 
-        {/* Bostad input */}
-        <Card className="shadow-lg border-border/50">
-          <CardHeader className="pb-4">
-            <CardTitle className="text-base font-medium text-muted-foreground">🏠 Bostad</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            {inputField("Bostadens pris", price, setPrice, "kr")}
-            {inputField("Kontantinsats", downPayment, setDownPayment, "kr")}
-            {inputField("Månadsavgift till föreningen", fee, setFee, "kr", 100)}
-            {inputField("Ränta", interestRate, setInterestRate, "%", 0.1)}
-          </CardContent>
-        </Card>
+        {/* Inputs side by side */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <Card className="shadow-lg border-border/50">
+            <CardHeader className="pb-4">
+              <CardTitle className="text-base font-medium text-muted-foreground">🏠 Bostad</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              {inputField("Bostadens pris", price, setPrice, "kr")}
+              {inputField("Kontantinsats", downPayment, setDownPayment, "kr")}
+              {inputField("Månadsavgift till föreningen", fee, setFee, "kr", 100)}
+              {inputField("Ränta", interestRate, setInterestRate, "%", 0.1)}
+            </CardContent>
+          </Card>
 
-        {/* Bil input */}
-        <Card className="shadow-lg border-border/50">
-          <CardHeader className="pb-4">
-            <CardTitle className="text-base font-medium text-muted-foreground">🚗 Bil</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            {inputField("Bilens pris", carPrice, setCarPrice, "kr")}
-            {inputField("Kontantinsats", carDownPayment, setCarDownPayment, "kr")}
-            {inputField("Ränta", carInterestRate, setCarInterestRate, "%", 0.1)}
-            {inputField("Övrig månadskostnad (försäkring m.m.)", carMonthlyCost, setCarMonthlyCost, "kr", 100)}
-          </CardContent>
-        </Card>
+          <Card className="shadow-lg border-border/50">
+            <CardHeader className="pb-4">
+              <CardTitle className="text-base font-medium text-muted-foreground">🚗 Bil</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              {inputField("Bilens pris", carPrice, setCarPrice, "kr")}
+              {inputField("Kontantinsats", carDownPayment, setCarDownPayment, "kr")}
+              {inputField("Ränta", carInterestRate, setCarInterestRate, "%", 0.1)}
+              {inputField("Övrig månadskostnad (försäkring m.m.)", carMonthlyCost, setCarMonthlyCost, "kr", 100)}
+            </CardContent>
+          </Card>
+        </div>
 
-        {/* Resultat Bostad */}
-        <Card className="shadow-lg border-border/50">
-          <CardHeader className="pb-4">
-            <CardTitle className="text-base font-medium text-muted-foreground">🏠 Resultat – Bostad</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-1">
-            {resultRow("Lån", formatSEK(loan))}
-            {resultRow("Belåningsgrad", formatPercent(ltv * 100))}
-            {resultRow("Amorteringstakt", `${amortizationRate} % / år`)}
-            <Separator className="my-2" />
-            {resultRow("Ränta", formatSEK(monthlyInterest))}
-            {resultRow("Amortering", formatSEK(monthlyAmortization))}
-            {resultRow("Avgift", formatSEK(fee))}
-            <Separator className="my-2" />
-            {resultRow("Bostad / månad", formatSEK(housingMonthlyCost), true)}
-          </CardContent>
-        </Card>
+        {/* Results side by side */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <Card className="shadow-lg border-border/50">
+            <CardHeader className="pb-4">
+              <CardTitle className="text-base font-medium text-muted-foreground">🏠 Resultat – Bostad</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-1">
+              {resultRow("Lån", formatSEK(loan))}
+              {resultRow("Belåningsgrad", formatPercent(ltv * 100))}
+              {resultRow("Amorteringstakt", `${amortizationRate} % / år`)}
+              <Separator className="my-2" />
+              {resultRow("Ränta", formatSEK(monthlyInterest))}
+              {resultRow("Amortering", formatSEK(monthlyAmortization))}
+              {resultRow("Avgift", formatSEK(fee))}
+              <Separator className="my-2" />
+              {resultRow("Bostad / månad", formatSEK(housingMonthlyCost), true)}
+            </CardContent>
+          </Card>
 
-        {/* Resultat Bil */}
-        <Card className="shadow-lg border-border/50">
-          <CardHeader className="pb-4">
-            <CardTitle className="text-base font-medium text-muted-foreground">🚗 Resultat – Bil</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-1">
-            {resultRow("Billån", formatSEK(carLoan))}
-            <Separator className="my-2" />
-            {resultRow("Ränta", formatSEK(carMonthlyInterest))}
-            {resultRow("Övrig kostnad", formatSEK(carMonthlyCost))}
-            <Separator className="my-2" />
-            {resultRow("Bil / månad", formatSEK(carTotalMonthlyCost), true)}
-          </CardContent>
-        </Card>
+          <Card className="shadow-lg border-border/50">
+            <CardHeader className="pb-4">
+              <CardTitle className="text-base font-medium text-muted-foreground">🚗 Resultat – Bil</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-1">
+              {resultRow("Billån", formatSEK(carLoan))}
+              <Separator className="my-2" />
+              {resultRow("Ränta", formatSEK(carMonthlyInterest))}
+              {resultRow("Övrig kostnad", formatSEK(carMonthlyCost))}
+              <Separator className="my-2" />
+              {resultRow("Bil / månad", formatSEK(carTotalMonthlyCost), true)}
+            </CardContent>
+          </Card>
+        </div>
 
         {/* Totalt */}
         <Card className="shadow-lg border-primary/20 bg-primary/5">
