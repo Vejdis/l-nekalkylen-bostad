@@ -25,8 +25,7 @@ const Index = () => {
 
   const monthlyInterest = (loan * (interestRate / 100)) / 12;
   const monthlyAmortization = (loan * (amortizationRate / 100)) / 12;
-  const monthlyInterestAfterDeduction = monthlyInterest * 0.7; // 30% ränteavdrag
-  const totalMonthlyCost = monthlyInterestAfterDeduction + monthlyAmortization + fee;
+  const totalMonthlyCost = monthlyInterest + monthlyAmortization + fee;
 
   const inputField = (
     label: string,
