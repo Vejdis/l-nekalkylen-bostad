@@ -90,7 +90,7 @@ const Index = () => {
             {resultRow("Belåningsgrad", formatPercent(ltv * 100))}
             {resultRow("Amorteringstakt", `${amortizationRate} % / år`)}
             <Separator className="my-2" />
-            {resultRow("Ränta (efter avdrag)", formatSEK(monthlyInterestAfterDeduction))}
+            {resultRow("Ränta", formatSEK(monthlyInterest))}
             {resultRow("Amortering", formatSEK(monthlyAmortization))}
             {resultRow("Avgift", formatSEK(fee))}
             <Separator className="my-2" />
