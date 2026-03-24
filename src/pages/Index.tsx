@@ -99,7 +99,7 @@ const Index = () => {
         </Card>
 
         <p className="text-xs text-center text-muted-foreground">
-          Beräkningen inkluderar 30 % ränteavdrag. Amortering enligt svenska amorteringskrav.
+          Amortering enligt svenska amorteringskrav.
         </p>
       </div>
     </div>
