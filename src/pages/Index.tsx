@@ -25,8 +25,7 @@ const Index = () => {
 
   const monthlyInterest = (loan * (interestRate / 100)) / 12;
   const monthlyAmortization = (loan * (amortizationRate / 100)) / 12;
-  const monthlyInterestAfterDeduction = monthlyInterest * 0.7; // 30% ränteavdrag
-  const totalMonthlyCost = monthlyInterestAfterDeduction + monthlyAmortization + fee;
+  const totalMonthlyCost = monthlyInterest + monthlyAmortization + fee;
 
   const inputField = (
     label: string,
@@ -91,7 +90,7 @@ const Index = () => {
             {resultRow("Belåningsgrad", formatPercent(ltv * 100))}
             {resultRow("Amorteringstakt", `${amortizationRate} % / år`)}
             <Separator className="my-2" />
-            {resultRow("Ränta (efter avdrag)", formatSEK(monthlyInterestAfterDeduction))}
+            {resultRow("Ränta", formatSEK(monthlyInterest))}
             {resultRow("Amortering", formatSEK(monthlyAmortization))}
             {resultRow("Avgift", formatSEK(fee))}
             <Separator className="my-2" />
@@ -100,7 +99,7 @@ const Index = () => {
         </Card>
 
         <p className="text-xs text-center text-muted-foreground">
-          Beräkningen inkluderar 30 % ränteavdrag. Amortering enligt svenska amorteringskrav.
+          Amortering enligt svenska amorteringskrav.
         </p>
       </div>
     </div>
